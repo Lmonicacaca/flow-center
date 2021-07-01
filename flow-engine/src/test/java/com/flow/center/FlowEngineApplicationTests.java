@@ -1,12 +1,9 @@
 package com.flow.center;
 
-import com.alibaba.fastjson.JSONObject;
-import com.flow.center.dubbo.ICommandRSV;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.apache.dubbo.config.annotation.Reference;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,8 +14,6 @@ import java.util.Map;
 @SpringBootTest(classes = FlowEngineApplication.class)
 @Slf4j
 class FlowEngineApplicationTests {
-    @Reference
-    private ICommandRSV commandRSV;
 
     /**
      * 初始化表结构
@@ -91,12 +86,6 @@ class FlowEngineApplicationTests {
 
         // Result is a concatenation of fixed injected field and injected expression
         log.info(String.valueOf(varSetByListener));
-    }
-
-
-    @Test
-    void testCreateProcess(){
-        System.out.println(JSONObject.toJSONString(commandRSV.startProcess("a1001:1:2504")));
     }
 
 }

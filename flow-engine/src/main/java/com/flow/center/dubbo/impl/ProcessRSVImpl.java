@@ -1,6 +1,6 @@
 package com.flow.center.dubbo.impl;
 
-import com.flow.center.dubbo.ICommandRSV;
+import com.flow.center.dubbo.IProcessRSV;
 import com.yjcloud.idol.common.response.BaseResponse;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 @Service
-public class CommandRSVImpl implements ICommandRSV {
+public class ProcessRSVImpl implements IProcessRSV {
     @Resource
     private RuntimeService runtimeService;
 
