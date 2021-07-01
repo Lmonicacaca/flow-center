@@ -189,15 +189,6 @@ public abstract class AbstractProcessEngineAutoConfiguration
     RepositoryService repositoryService = super.repositoryServiceBean(processEngine);
     //启动从mongodb获取最新的流程定义
     if (ActivitiProperties.MODEL_REMOTE.equals(activitiProperties.getModel())) {
-  /*    if (!activitiProperties.isAuto()) {
-          deploy(activitiProperties.getAppId(),repositoryService);
-      } else {
-        if (appIdQuery == null) {
-            throw new IllegalArgumentException("AppIdQuery 没有找到实现类....");
-        } else {
-            deploy(appIdQuery.queryAppIds(),repositoryService);
-        }
-      }*/
     CompletableFuture.runAsync(new Runnable() {
       @Override
       public void run() {
@@ -212,8 +203,6 @@ public abstract class AbstractProcessEngineAutoConfiguration
   private void deploy (RepositoryService repositoryService) {
 
       Query query = new Query();
-/*      Pattern compile = Pattern.compile("^" + appId + "-", Pattern.CASE_INSENSITIVE);
-      query.addCriteria(Criteria.where("filename").regex(compile));*/
     Pattern compile = Pattern.compile("^.*?bpmn20.xml$", Pattern.CASE_INSENSITIVE);
     query.addCriteria(Criteria.where("filename").regex(compile));
       GridFSFindIterable gridFSFiles = gridFsTemplate.find(query);

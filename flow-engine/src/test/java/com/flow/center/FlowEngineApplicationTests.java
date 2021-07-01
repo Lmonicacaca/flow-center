@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-@SpringBootTest(classes = FlowEngineApplication.class)
+//
+//@SpringBootTest
 @Slf4j
 class FlowEngineApplicationTests {
 
@@ -35,7 +35,7 @@ class FlowEngineApplicationTests {
     void deployProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        repositoryService.createDeployment().addClasspathResource("processes/test.bpmn20.xml").deploy();
+        repositoryService.createDeployment().addClasspathResource("processes/test01.bpmn20.xml").deploy();
         log.info("Number of process definitions: " + repositoryService.createProcessDefinitionQuery().count());
     }
 
