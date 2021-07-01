@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.flow.center</groupId>
+    <artifactId>flow-center</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <description>activiti6流程引擎项目</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
+        <slf4j.api.version>1.7.29</slf4j.api.version>
+        <dubbo.version>2.7.4</dubbo.version>
+        <nacos.version>1.2.1</nacos.version>
+        <dubbo.starter.version>2.7.4.1</dubbo.starter.version>
+        <activiti.version>6.0.0</activiti.version>
+    </properties>
+
+    <modules>
+        <module>flow-engine</module>
+        <module>flow-api</module>
+        <module>activiti-flow-engine</module>
+        <module>activiti-flow-starter</module>
+    </modules>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.api.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>1.18.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

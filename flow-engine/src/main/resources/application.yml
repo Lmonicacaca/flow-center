@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: flow-engine
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    namespace: flow-center
+    bootstrap:
+      enable: true
+    data-ids: ${spring.application.name}.${nacos.config.type},common-config.yaml,data-source.yaml
+    type: yaml
+
+#nacos相同配置，本地优先
+dubbo:
+  group: flow-dev
+
+
