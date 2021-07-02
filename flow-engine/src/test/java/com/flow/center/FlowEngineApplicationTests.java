@@ -28,7 +28,7 @@ class FlowEngineApplicationTests {
     void deployProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        repositoryService.createDeployment().addClasspathResource("processes/gateway01.bpmn20.xml").deploy();
+        repositoryService.createDeployment().addClasspathResource("processes/parallel.bpmn20.xml").deploy();
         log.info("Number of process definitions: " + repositoryService.createProcessDefinitionQuery().count());
     }
 
@@ -39,7 +39,7 @@ class FlowEngineApplicationTests {
     void createProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a1001:2:25004");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a2002:9:100004");
 
         // Verify that we started a new process instance
         log.info("Number of process instances: " + runtimeService.createProcessInstanceQuery().count());
