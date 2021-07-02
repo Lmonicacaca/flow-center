@@ -39,7 +39,7 @@ class FlowEngineApplicationTests {
     void createProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("invoiceProcess");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a1001:2:25004");
 
         // Verify that we started a new process instance
         log.info("Number of process instances: " + runtimeService.createProcessInstanceQuery().count());
