@@ -18,7 +18,7 @@ public class StartNotApplicationTest {
     void doTask(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         TaskService taskService = defaultProcessEngine.getTaskService();
-        List<Task> list = taskService.createTaskQuery().processInstanceId("102501").list();
+        List<Task> list = taskService.createTaskQuery().processInstanceId("110001").list();
         Task task = list.get(0);
         log.info(task.getName());
         taskService.complete(task.getId());

@@ -71,25 +71,30 @@ public abstract class AbstractProcessEngineConfiguration {
   }
 
   public List<Resource> discoverProcessDefinitionResources(ResourcePatternResolver applicationContext, String prefix, List<String> suffixes, boolean checkPDs) throws IOException {
-    if (checkPDs) {
+    try {
+        if (checkPDs) {
 
-    	List<Resource> result = new ArrayList<Resource>();
-    	for (String suffix : suffixes) {
-    		String path = prefix + suffix;
-    		Resource[] resources = applicationContext.getResources(path);
-    		if (resources != null && resources.length > 0) {
-    			for (Resource resource : resources) {
-    				result.add(resource);
-    			}
-    		}
-    	}
-    	
-    	if (result.isEmpty()) {
-      	logger.info(String.format("No process definitions were found for autodeployment"));
-    	}
-    	
-      return result;
+            List<Resource> result = new ArrayList<Resource>();
+            for (String suffix : suffixes) {
+                String path = prefix + suffix;
+                Resource[] resources = applicationContext.getResources(path);
+                if (resources != null && resources.length > 0) {
+                    for (Resource resource : resources) {
+                        result.add(resource);
+                    }
+                }
+            }
+
+            if (result.isEmpty()) {
+                logger.info(String.format("No process definitions were found for autodeployment"));
+            }
+
+            return result;
+        }
+    }catch (Exception e){
+        logger.info("start error:"+e);
     }
+
     return new ArrayList<Resource>();
   }
 
