@@ -28,7 +28,7 @@ class FlowEngineApplicationTests {
     void deployProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        repositoryService.createDeployment().addClasspathResource("test/parallel.bpmn20.xml").deploy();
+        repositoryService.createDeployment().addClasspathResource("test/timer.bpmn20.xml").deploy();
         log.info("Number of process definitions: " + repositoryService.createProcessDefinitionQuery().count());
     }
 

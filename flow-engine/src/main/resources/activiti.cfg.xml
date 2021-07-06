@@ -12,6 +12,8 @@
 
         <property name="databaseSchemaUpdate" value="true" />
 
+        <!--有定时事件需开启-->
+        <property name="asyncExecutorActivate" value="true"/>
     </bean>
 
 </beans>
