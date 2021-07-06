@@ -28,7 +28,7 @@ class FlowEngineApplicationTests {
     void deployProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        repositoryService.createDeployment().addClasspathResource("test/timer.bpmn20.xml").deploy();
+        repositoryService.createDeployment().addClasspathResource("test/expression.bpmn20.xml").deploy();
         log.info("Number of process definitions: " + repositoryService.createProcessDefinitionQuery().count());
     }
 
@@ -39,7 +39,7 @@ class FlowEngineApplicationTests {
     void createProcess(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a2002:1:107504");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a4001:3:190004");
 
         // Verify that we started a new process instance
         log.info("Number of process instances: " + runtimeService.createProcessInstanceQuery().count());

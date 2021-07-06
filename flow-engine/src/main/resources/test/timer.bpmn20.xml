@@ -3,7 +3,7 @@
   <process id="a3001" name="开始事件定时启动流程" isExecutable="true">
     <startEvent id="sid-A5C28EF0-D20F-4A0F-BF8B-40AF7F84D78E" activiti:isInterrupting="false">
       <timerEventDefinition>
-        <timeCycle>R5/PT1M</timeCycle>
+        <timeCycle>0 0/1 * * * ?</timeCycle>
       </timerEventDefinition>
     </startEvent>
     <userTask id="sid-D5939F27-83CA-40A2-8A63-263892762DD6"></userTask>
