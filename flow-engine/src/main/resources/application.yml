@@ -7,7 +7,7 @@ nacos:
     namespace: flow-center
     bootstrap:
       enable: true
-    data-ids: ${spring.application.name}.${nacos.config.type},common-config.yaml,data-source.yaml
+    data-ids: ${spring.application.name}.${nacos.config.type},common-config.yaml,data-source.yaml,mongo.yaml,redis.yaml
     type: yaml
 
 #nacos相同配置，本地优先

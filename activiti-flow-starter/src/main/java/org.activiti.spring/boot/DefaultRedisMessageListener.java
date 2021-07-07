@@ -67,7 +67,6 @@ public class DefaultRedisMessageListener implements MessageListener {
   @Override
   public void onMessage(Message message, byte[] pattern) {
     byte[] channel = message.getChannel();
-    //String msgChannel = (String) redisTemplate.getValueSerializer().deserialize(channel);
     String s = new String(channel);
     LOG.info("msgChannel ---->"+s);
     
@@ -77,16 +76,6 @@ public class DefaultRedisMessageListener implements MessageListener {
     int count = msgBody.length() - msgBody.replaceAll(":", "").length();
     if (StringUtils.isNotBlank(msgBody)&&count==3){
       String[] split = msgBody.split(":");
-  /*    if (activitiProperties.isAuto()) {
-        if (appIdQuery.isContain(Long.valueOf(split[0]).longValue())) {
-          this.deploy(split);
-        }
-
-      } else {
-        if (activitiProperties.getAppId().contains(Long.valueOf(split[0]).longValue())){
-          this.deploy(split);
-        }
-      }*/
       this.deploy(split);
     }
   }
