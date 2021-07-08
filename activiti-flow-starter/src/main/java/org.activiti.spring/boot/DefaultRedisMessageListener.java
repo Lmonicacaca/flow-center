@@ -73,8 +73,7 @@ public class DefaultRedisMessageListener implements MessageListener {
     byte[] body = message.getBody();
     String msgBody = (String) redisTemplate.getValueSerializer().deserialize(body);
     LOG.info("msgBody ---->"+msgBody);
-    int count = msgBody.length() - msgBody.replaceAll(":", "").length();
-    if (StringUtils.isNotBlank(msgBody)&&count==3){
+    if (StringUtils.isNotBlank(msgBody)){
       String[] split = msgBody.split(":");
       this.deploy(split);
     }
@@ -82,11 +81,11 @@ public class DefaultRedisMessageListener implements MessageListener {
 
   private void deploy (String[] split) {
       Query query = new Query();
-      query.addCriteria(Criteria.where("_id").is(split[2]));
+      query.addCriteria(Criteria.where("_id").is(split[1]));
       GridFSFile one = gridFsTemplate.findOne(query);
       if (one!=null) {
         LOG.info(" refresh process xml name is "+one.getFilename());
-        List<Deployment> list = repositoryService.createDeploymentQuery().deploymentId(split[2]).list();
+        List<Deployment> list = repositoryService.createDeploymentQuery().deploymentCategory(split[1]).list();
         if (list!=null&&list.size()>0){
           LOG.info("process xml name : " + one.getFilename()+" had deploy" );
           return;
@@ -94,7 +93,7 @@ public class DefaultRedisMessageListener implements MessageListener {
         try {
           GridFsResource resource = gridFsTemplate.getResource(one);
           DeploymentBuilder deploymentBuilder = repositoryService.createDeployment().addInputStream(one.getFilename(), resource.getInputStream());
-          deploymentBuilder.tenantId(split[1]).key(split[0]).category(split[2]).name(one.getFilename()).deploy();
+          deploymentBuilder.key(split[0]).category(split[1]).name(one.getFilename()).deploy();
           LOG.info("process xml name : " + one.getFilename() + " is deploying");
         }catch (Exception e){
           LOG.error("process "+one.getFilename()+" deloy error : "+e.getMessage(),e);
