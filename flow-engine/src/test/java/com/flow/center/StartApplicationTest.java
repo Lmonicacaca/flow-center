@@ -31,13 +31,4 @@ public class StartApplicationTest {
 
     }
 
-
-
-    @Test
-    void withdraw(){
-        List<Task> list = taskService.createTaskQuery().processInstanceId("125001").list();
-        Task task = list.get(0);
-        processRSV.withdraw(task.getId(),"","");
-    }
-
 }

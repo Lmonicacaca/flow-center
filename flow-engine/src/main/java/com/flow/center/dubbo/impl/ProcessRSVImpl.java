@@ -51,15 +51,4 @@ public class ProcessRSVImpl implements IProcessRSV {
 
         return BaseResponse.buildSuccessResponse();
     }
-
-    @Override
-    public BaseResponse withdraw(String taskId, String userId, String reason) {
-        if (StringUtils.isNotBlank(reason)) {
-            taskService.addComment(taskId, reason);
-        }
-        WithdrawCmd withdrawCmd = new WithdrawCmd(taskId, userId);
-        managementService.executeCommand(withdrawCmd);
-
-        return BaseResponse.buildSuccessResponse();
-    }
 }

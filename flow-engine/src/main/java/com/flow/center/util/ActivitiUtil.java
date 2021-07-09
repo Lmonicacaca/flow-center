@@ -133,30 +133,6 @@ public class ActivitiUtil implements ApplicationContextAware {
     }
 
     /**
-     * 必须是用户节点usertask
-     *
-     * @param processDefinitionId
-     * @param activity
-     * @return
-     */
-    public static List<String> findNextActivityId(String processDefinitionId, String activity) {
-        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-        Process mainProcess = bpmnModel.getMainProcess();
-        FlowElement flowElement = mainProcess.getFlowElement(activity);
-        if (Objects.nonNull(flowElement)) {
-            if (flowElement instanceof UserTask) {
-                FlowNode flowElement1 = (FlowNode) flowElement;
-                List<SequenceFlow> outgoingFlows = flowElement1.getOutgoingFlows();
-                if (!CollectionUtils.isEmpty(outgoingFlows)) {
-                    return outgoingFlows.stream().map(SequenceFlow::getTargetRef).collect(Collectors.toList());
-                }
-            }
-
-        }
-        return Lists.newArrayList();
-    }
-
-    /**
      * 找到发起人节点
      *
      * @param processDefinitionId
@@ -182,13 +158,6 @@ public class ActivitiUtil implements ApplicationContextAware {
         FlowNode targetActivity = null;
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-
-        //查找上一个user task节点
-        /*List<HistoricActivityInstance> historicActivityInstances = historyService
-                .createHistoricActivityInstanceQuery().activityType("userTask")
-                .processInstanceId(processInstance.getId())
-                .finished()
-                .orderByHistoricActivityInstanceEndTime().desc().list();*/
 
         while (true) {
             Process mainProcess = bpmnModel.getMainProcess();
@@ -232,13 +201,6 @@ public class ActivitiUtil implements ApplicationContextAware {
     public static FlowNode getPreOneIncomeNode(String taskDefinitionKey, String processDefinitionId) {
         final List<FlowNode> preNodes = new ArrayList<>();
         getIncomeNodesRecur(taskDefinitionKey, processDefinitionId, preNodes, false);
-        /*preNodes.forEach(node -> {
-            List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery()
-                    .processDefinitionId(processDefId).activityId(node.getId()).finished().list();
-            if (CollectionUtil.isEmpty(historicActivityInstances)) {
-                preNodes.remove(node);
-            }
-        });*/
         if (CollectionUtil.isEmpty(preNodes)) {
             return null;
         }
@@ -295,11 +257,11 @@ public class ActivitiUtil implements ApplicationContextAware {
      * 获取发起人节点
      *
      * @param appId
-     * @param courtId
+     * @param tenantId
      * @return
      */
-    public static FlowElement findFlowFirstUserTask(String appId, Long courtId) {
-        Process process = getProcess(appId, courtId);
+    public static FlowElement findFlowFirstUserTask(String appId, Long tenantId) {
+        Process process = getProcess(appId, tenantId);
         return findFirstUserTaskNode(process);
     }
 
@@ -390,6 +352,7 @@ public class ActivitiUtil implements ApplicationContextAware {
         }
         return nodeMap;
     }
+
 
     /**
      * 获取下一个userTask
@@ -530,9 +493,9 @@ public class ActivitiUtil implements ApplicationContextAware {
         return (Boolean) e.getValue(context);
     }
 
-    public static Process getProcess(String appId, Long courtId) {
+    public static Process getProcess(String appId, Long tenantId) {
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
-                .processDefinitionKey("a" + appId + "-" + courtId).latestVersion().singleResult();
+                .processDefinitionKey("a" + appId + "-" + tenantId).latestVersion().singleResult();
         if (processDefinition != null) {
             BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
             return bpmnModel.getMainProcess();
@@ -551,9 +514,6 @@ public class ActivitiUtil implements ApplicationContextAware {
         return Boolean.TRUE;
     }
 
-    public static HistoryService historyService() {
-        return processEngineConfiguration.getHistoryService();
-    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

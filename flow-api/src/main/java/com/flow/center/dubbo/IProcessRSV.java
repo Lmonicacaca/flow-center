@@ -25,13 +25,4 @@ public interface IProcessRSV {
      */
     BaseResponse startProcess(String processId, Map<String,Object> params);
 
-
-    /**
-     * 撤回
-     * @param taskId
-     * @param userId
-     * @param reason
-     * @return
-     */
-    BaseResponse withdraw(String taskId,String userId,String reason);
 }

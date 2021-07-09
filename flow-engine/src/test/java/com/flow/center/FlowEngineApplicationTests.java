@@ -44,7 +44,7 @@ class FlowEngineApplicationTests {
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a5001:1:240092");
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById("a2002:1:310004");
 
         // Verify that we started a new process instance
         log.info("Number of process instances: " + runtimeService.createProcessInstanceQuery().count());
